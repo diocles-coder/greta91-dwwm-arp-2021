@@ -35,7 +35,6 @@ document.addEventListener(
 );
 
 // Requête AJAX n°2
-
 getZip = function () {
     let zip = document.getElementById('zip').value;
     let land = document.getElementById('land').value;
@@ -70,7 +69,3 @@ document.getElementById('zip').addEventListener(
     getZip,
     false
 );
-
-
-
-
