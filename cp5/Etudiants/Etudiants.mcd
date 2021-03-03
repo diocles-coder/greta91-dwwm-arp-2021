@@ -1,0 +1,7 @@
+ETUDIANT:code_e, nom_e, ddn_e, sexe_e
+:
+INTERVENANT:code_i, nom_i, grade_i, anciennete
+
+ETUDIE, 1N ETUDIANT, 0N MATIERE:note
+MATIERE:code_m, nom_m, coeff
+ENSEIGNE, 11 MATIERE, 1N INTERVENANT

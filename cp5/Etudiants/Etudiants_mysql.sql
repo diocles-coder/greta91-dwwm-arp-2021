@@ -1,0 +1,37 @@
+CREATE DATABASE IF NOT EXISTS `ETUDIANTS` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `ETUDIANTS`;
+
+CREATE TABLE `ETUDIANT` (
+  `code_e` VARCHAR(42),
+  `nom_e` VARCHAR(42),
+  `ddn_e` VARCHAR(42),
+  `sexe_e` VARCHAR(42),
+  PRIMARY KEY (`code_e`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `INTERVENANT` (
+  `code_i` VARCHAR(42),
+  `nom_i` VARCHAR(42),
+  `grade_i` VARCHAR(42),
+  `anciennete` VARCHAR(42),
+  PRIMARY KEY (`code_i`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `ETUDIE` (
+  `code_e` VARCHAR(42),
+  `code_m` VARCHAR(42),
+  `note` VARCHAR(42),
+  PRIMARY KEY (`code_e`, `code_m`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `MATIERE` (
+  `code_m` VARCHAR(42),
+  `nom_m` VARCHAR(42),
+  `coeff` VARCHAR(42),
+  `code_i` VARCHAR(42),
+  PRIMARY KEY (`code_m`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+ALTER TABLE `ETUDIE` ADD FOREIGN KEY (`code_m`) REFERENCES `MATIERE` (`code_m`);
+ALTER TABLE `ETUDIE` ADD FOREIGN KEY (`code_e`) REFERENCES `ETUDIANT` (`code_e`);
+ALTER TABLE `MATIERE` ADD FOREIGN KEY (`code_i`) REFERENCES `INTERVENANT` (`code_i`);

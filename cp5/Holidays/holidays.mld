@@ -1,0 +1,22 @@
+%%mocodo
+:
+HOTELS: hotel_id, hotel_name, stars, address, zip, city, photo, #group_id->GROUPS->group_id
+:::
+OPTIONS: option_id, option_name
+:
+
+
+:::
+ROOMS: room_no, area, room_tel, price, #hotel_id->HOTELS->hotel_id
+:
+HAS: #room_no->ROOMS->room_no, _#option_id->OPTIONS->option_id
+:
+
+
+:
+GROUPS: group_id, group_name
+:
+BOOKS: #room_no->ROOMS->room_no, _#cust_id->CUSTOMERS->cust_id, start, end, price
+:
+CUSTOMERS: cust_id, fname, lname, address, zip, city
+:

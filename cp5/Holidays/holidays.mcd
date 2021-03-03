@@ -1,0 +1,11 @@
+HOTELS:hotel_id, hotel_name, stars, address, zip, city, photo
+CONTAINS, 1N HOTELS, 11 ROOMS
+OPTIONS:option_id, option_name
+
+OWNS, 1N GROUPS, 11 HOTELS
+ROOMS:room_no, area, room_tel, price
+HAS, 1N ROOMS, 1N OPTIONS
+
+GROUPS:group_id, group_name
+BOOKS, 1N ROOMS, 0N CUSTOMERS:start, end, price
+CUSTOMERS:cust_id, fname, lname, address, zip, city

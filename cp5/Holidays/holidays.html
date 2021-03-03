@@ -1,0 +1,73 @@
+<html>
+<head>
+<meta charset='utf-8'>
+<style>
+  #mld .relation { font-variant: small-caps; font-weight: bold }
+  #mld .primary { text-decoration: underline }
+  #mld .foreign { font-style: oblique }
+  #mld .normal { }
+</style>
+</head>
+<body>
+<div id='mld'>
+<div>
+  <span class='relation'>HOTELS</span> (
+    <span class='primary'>hotel_id</span>,
+    <span class='normal'>hotel_name</span>,
+    <span class='normal'>stars</span>,
+    <span class='normal'>address</span>,
+    <span class='normal'>zip</span>,
+    <span class='normal'>city</span>,
+    <span class='normal'>photo</span>,
+    <span class='foreign'>group_id</span>
+  )
+</div>
+<div>
+  <span class='relation'>OPTIONS</span> (
+    <span class='primary'>option_id</span>,
+    <span class='normal'>option_name</span>
+  )
+</div>
+<div>
+  <span class='relation'>ROOMS</span> (
+    <span class='primary'>room_no</span>,
+    <span class='normal'>area</span>,
+    <span class='normal'>room_tel</span>,
+    <span class='normal'>price</span>,
+    <span class='foreign'>hotel_id</span>
+  )
+</div>
+<div>
+  <span class='relation'>HAS</span> (
+    <span class='foreign primary'>room_no</span>,
+    <span class='foreign primary'>option_id</span>
+  )
+</div>
+<div>
+  <span class='relation'>GROUPS</span> (
+    <span class='primary'>group_id</span>,
+    <span class='normal'>group_name</span>
+  )
+</div>
+<div>
+  <span class='relation'>BOOKS</span> (
+    <span class='foreign primary'>room_no</span>,
+    <span class='foreign primary'>cust_id</span>,
+    <span class='normal'>start</span>,
+    <span class='normal'>end</span>,
+    <span class='normal'>price</span>
+  )
+</div>
+<div>
+  <span class='relation'>CUSTOMERS</span> (
+    <span class='primary'>cust_id</span>,
+    <span class='normal'>fname</span>,
+    <span class='normal'>lname</span>,
+    <span class='normal'>address</span>,
+    <span class='normal'>zip</span>,
+    <span class='normal'>city</span>
+  )
+</div>
+</div>
+</body>
+</html>
