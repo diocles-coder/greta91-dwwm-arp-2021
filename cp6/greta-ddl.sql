@@ -1,3 +1,7 @@
+-- ##################################################
+-- SQL-DDL : Data Definition Language
+-- ##################################################
+
 -- Script de création de la BDD GRETA
 -- Attention ce script supprime la BDD avant de la recréer !!!
 
@@ -74,4 +78,15 @@ CREATE TABLE greta.follows(
 	CONSTRAINT follows_eval_ck
 		CHECK (eval BETWEEN 0 AND 20)
 ) ENGINE=InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+;
+
+-- Ajoute la colonne EMAIL à la table TRAINEES
+ALTER TABLE trainees
+	ADD COLUMN email VARCHAR(100),
+    ADD CONSTRAINT trainees_email_uq UNIQUE(email)
+;
+
+-- Crée un index sur la colonne DOB de la table TRAINEES
+CREATE INDEX trainees_dob_idx
+ON trainees(dob)
 ;
