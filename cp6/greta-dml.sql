@@ -54,3 +54,39 @@ INSERT INTO trainees(fname, dob, sex, internal, email) VALUES
 SELECT *
 FROM trainees
 ;
+
+-- Ajoute des lignes à la table TRAINERS
+INSERT INTO trainers(fname, grade, dob) VALUES
+	('Nadjet', 'C', '2000-08-19'),
+    ('Lesly', 'A', '1967-11-11')
+;
+
+-- Check table TRAINERS
+SELECT *
+FROM trainers
+;
+
+-- Mettre les fichiers CSV dans le dossier indiqué par la variable "secure_file_priv"
+-- Sinon modifier le paramètre présent dans my.ini à la rubrique [mysqld]
+-- Exemple : secure-file-priv = "d:/apps/uwamp/www/arpajon/cp6"
+-- Redémarrer le serveur
+SHOW VARIABLES LIKE 'secure_file_priv'
+;
+
+-- Importe le contenu du fichier CSV courses
+LOAD DATA INFILE 'd:/apps/uwamp/www/arpajon/cp6/greta-courses.csv' 
+	INTO TABLE greta.courses
+	FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"'
+	LINES TERMINATED BY '\r\n'
+	IGNORE 1 LINES
+;
+
+-- Importe le contenu du fichier CSV courses
+LOAD DATA INFILE 'd:/apps/uwamp/www/arpajon/cp6/greta-follows.csv' 
+	INTO TABLE greta.follows
+	FIELDS TERMINATED BY ';' 
+    ENCLOSED BY '"'
+	LINES TERMINATED BY '\r\n'
+	IGNORE 1 LINES
+;
