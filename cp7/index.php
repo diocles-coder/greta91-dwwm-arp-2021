@@ -1,5 +1,6 @@
 <?php
 include_once('inc/constants.inc.php');
+include_once('inc/team.inc.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -27,6 +28,38 @@ include_once('inc/constants.inc.php');
         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#register">Inscription</button>
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#login">Connexion</button>
     </div>
+
+    <h2>Nos dirigeant.e.s</h2>
+    <section id="team" class="d-flex flex-wrap justify-content-around">
+        <div class="card my-3" style="width:15rem">
+            <img src="pics/face.jpg" alt="photo du dirigeant" class="card-img-top">
+            <div class="card-body">
+                <h5>Lesly</h5>
+                <p class="card-text"><strong>Hôtel : </strong>Hôtel de police</p>
+                <p class="card-text"><strong>Lieu : </strong>Arpajon, France</p>
+                <p class="card-text"><strong>Capacité : </strong>15 chambres</p>
+            </div>
+        </div>
+        <?php
+        // Template HTML
+        $card =
+            '<div class="card my-3" style="width:15rem">
+            <img src="pics/face.jpg" alt="photo du dirigeant" class="card-img-top">
+            <div class="card-body">
+            <h5>%s</h5>
+            <p class="card-text"><strong>Hôtel : </strong>%s</p>
+            <p class="card-text"><strong>Lieu : </strong>%s</p>
+            <p class="card-text"><strong>Capacité : </strong>%d chambres</p>
+            </div>
+            </div>';
+        $html = '';
+        // Affiche la liste de tous les dirigeants issus de l'array TEAM
+        foreach ($team as $boss) {
+            $html .= sprintf($card, $boss['fname'], $boss['hotel'], $boss['loc'], $boss['rooms']);
+        }
+        echo $html;
+        ?>
+    </section>
 </body>
 
 </html>
