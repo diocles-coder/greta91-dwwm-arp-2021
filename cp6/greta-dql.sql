@@ -117,3 +117,89 @@ SELECT t.fname, c.name
 FROM trainers t NATURAL JOIN courses c
 ;
 
+-- Jointures externes
+SELECT t.fname, c.name
+FROM trainers t LEFT JOIN courses c ON c.id_tr = t.id_tr
+;
+
+INSERT INTO courses(name)
+VALUES('Langage Python')
+;
+
+SELECT t.fname, c.name
+FROM trainers t RIGHT JOIN courses c ON c.id_tr = t.id_tr
+;
+
+-- Structure CASE simple
+SELECT fname, 
+		sex, 
+        dob,
+        CASE MONTH(dob)
+			WHEN 1 THEN 'Hiver'
+			WHEN 2 THEN 'Hiver'
+			WHEN 3 THEN 'Hiver'
+            WHEN 4 THEN 'Printemps'
+            WHEN 5 THEN 'Printemps'
+            WHEN 6 THEN 'Printemps'
+            WHEN 7 THEN 'Eté'
+            WHEN 8 THEN 'Eté'
+            WHEN 9 THEN 'Eté'
+            WHEN 10 THEN 'Automne'
+            WHEN 11 THEN 'Automne'
+            WHEN 12 THEN 'Automne'
+            ELSE 'Inconnue'
+        END AS saison
+FROM trainees
+ORDER BY saison
+;
+
+-- Structure CASE élaboré
+SELECT fname, 
+		sex, 
+        dob,
+        CASE 
+			WHEN MONTH(dob) < 4 THEN 'Hiver'
+			WHEN MONTH(dob) < 7 THEN 'Printemps'
+			WHEN MONTH(dob) < 10 THEN 'Eté'
+			WHEN MONTH(dob) < 13 THEN 'Automne'
+            ELSE 'Inconnue'
+        END AS saison,
+        -- Ajouter une colonne calculée CIVILITE
+        -- qui affiche 'Madame' si sex='f'
+        -- et 'Jeune homme' si sex='m' et age < 30
+        -- ou 'Monsieur' si sex='m' et age >= 30
+        CASE
+			WHEN sex = 'F' THEN 'Madame'
+            WHEN sex = 'M' AND DATEDIFF(NOW(),dob)/365.25 < 30 THEN 'Jeune homme'
+            WHEN sex = 'M' AND DATEDIFF(NOW(),dob)/365.25 >= 30 THEN 'Monsieur'
+        END AS civilite
+FROM trainees
+ORDER BY saison
+;
+
+-- Regroupement : GROUP BY
+SELECT sex, COUNT(id_te) AS nb
+FROM trainees
+GROUP BY sex
+;
+
+SELECT sex, internal, COUNT(id_te) AS nb
+FROM trainees
+GROUP BY sex, internal
+;
+
+-- Regroupements : HAVING
+SELECT t.fname, c.name, AVG(f.eval) AS moyenne
+FROM trainers t JOIN courses c JOIN follows f
+ON t.id_tr = c.id_tr AND c.id_c = f.id_c
+WHERE f.id_te != 14
+GROUP BY t.fname, c.name
+HAVING AVG(f.eval) < 12
+ORDER BY moyenne
+;
+
+
+
+
+
+
