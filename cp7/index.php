@@ -29,6 +29,14 @@ include_once('inc/team.inc.php');
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#login">Connexion</button>
     </div>
 
+    <div class="btn-group">
+        <a href="cities.php" class="btn btn-primary">Villes</a>
+        <a href="hotels.php" class="btn btn-primary">Hôtels</a>
+        <a href="rooms.php" class="btn btn-primary">Chambres</a>
+        <a href="booking.php" class="btn btn-primary">Réservations</a>
+        <a href="customers.php" class="btn btn-primary">Clients</a>
+    </div>
+
     <h2>Nos dirigeant.e.s</h2>
     <section id="team" class="d-flex flex-wrap justify-content-around">
         <div class="card my-3" style="width:15rem">
@@ -44,7 +52,7 @@ include_once('inc/team.inc.php');
         // Template HTML
         $card =
             '<div class="card my-3" style="width:15rem">
-            <img src="pics/face.jpg" alt="photo du dirigeant" class="card-img-top">
+            <img src="%s" alt="photo du dirigeant" class="card-img-top">
             <div class="card-body">
             <h5>%s</h5>
             <p class="card-text"><strong>Hôtel : </strong>%s</p>
@@ -55,7 +63,16 @@ include_once('inc/team.inc.php');
         $html = '';
         // Affiche la liste de tous les dirigeants issus de l'array TEAM
         foreach ($team as $boss) {
-            $html .= sprintf($card, $boss['fname'], $boss['hotel'], $boss['loc'], $boss['rooms']);
+            if (array_key_exists('photo', $boss)) {
+                // Si la clé 'photo' existe alors assigner la valeur de cette clé à la variable '$photo'
+                $photo = $boss['photo'];
+            } else {
+                // Sinon assigner la valeur 'pics/face.jpg' à la variable '$photo'
+                $photo = 'pics/face.jpg';
+            }
+            // ou bien
+            $photo = array_key_exists('photo', $boss) ? $boss['photo'] : 'pics/face.jpg';
+            $html .= sprintf($card, $photo, $boss['fname'], $boss['hotel'], $boss['loc'], $boss['rooms']);
         }
         echo $html;
         ?>

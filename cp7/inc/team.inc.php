@@ -4,14 +4,16 @@ $team[] = array(
     'fname' => 'Sidonie',
     'hotel' => 'Miros',
     'loc' => 'Athènes, Grèce',
-    'rooms' => 154
+    'rooms' => 154,
+    'photo' => 'pics/face3.jpg'
 );
 
 $team[] = array(
     'fname' => 'Océane',
     'hotel' => 'Marriott',
     'loc' => 'Erevan, Arménie',
-    'rooms' => 256
+    'rooms' => 256,
+    'photo' => 'pics/face2.jpg'
 );
 
 $team[] = array(
@@ -60,7 +62,8 @@ $team[] = array(
     'fname' => 'Bunsen',
     'hotel' => 'ANNAMALAI',
     'loc' => 'Pondichery, Inde',
-    'rooms' => 300
+    'rooms' => 300,
+    'photo' => 'pics/face4.jpg'
 );
 
 $team[] = array(
