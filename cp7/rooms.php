@@ -1,6 +1,7 @@
 <?php
 // Imports
 include_once('inc/constants.inc.php');
+include_once('inc/dbconnect.inc.php');
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -14,29 +15,14 @@ include_once('inc/constants.inc.php');
 </head>
 
 <body class="container">
-    <h1>Villes de destination</h1>
+    <h1>Nos chambres</h1>
 
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="index.php">Accueil</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Destinations</li>
+            <li class="breadcrumb-item active" aria-current="page">Chambres</li>
         </ol>
     </nav>
-
-    <?php
-    // Connexion à la BDD en utilisant PDO
-    try {
-        // Tentative de connexion
-        // $cnn = new PDO('mysql:host=localhost;dbname=holidays;charset=utf8', 'root', 'root');
-        $cnn = new PDO('mysql:host=' . HOST . ';port=' . PORT . ';dbname=' . DATA . ';charset=utf8', USER, PASS);
-        // Affecte les attributs à la connexion
-        $cnn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $cnn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-    } catch (PDOException $err) {
-        // Si erreur de connexion
-        echo '<p class="alert alert-danger">' . $err->getMessage() . '</p>';
-    }
-    ?>
 
     <table class="table table-striped">
         <thead class="thead-dark">
@@ -44,8 +30,20 @@ include_once('inc/constants.inc.php');
                 <?php
                 try {
                     // Tentative d'exécution d'une requête SQL
-                    $qry = $cnn->query('SELECT * FROM cities');
-                    // Affiche le nom des colonnes
+                    $sql =
+                        "SELECT h.name AS hotel, 
+                        h.address, 
+                        h.zip, 
+                        c.name AS city, 
+                        c.land, 
+                        r.rno AS romm_nb, 
+                        r.type, 
+                        r.price*1.19 AS price_dollar
+                        FROM cities c JOIN hotels h JOIN rooms r
+                        ON c.zip = h.zip AND h.hno = r.hno
+                        ORDER BY r.price";
+                    $qry = $cnn->query($sql);
+                    // Affiche le nom des colonnes ---> TODO : GETCOLUMNMETA FOR PHP8
                     $html = '';
                     for ($i = 0; $i < $qry->columnCount(); $i++) {
                         $meta = $qry->getColumnMeta($i);
