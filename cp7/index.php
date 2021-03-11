@@ -29,7 +29,7 @@ include_once('inc/team.inc.php');
         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#login">Connexion</button>
     </div>
 
-    <div class="btn-group">
+    <div class="btn-group mb-3">
         <a href="cities.php" class="btn btn-primary">Villes</a>
         <a href="hotels.php" class="btn btn-primary">Hôtels</a>
         <a href="rooms.php" class="btn btn-primary">Chambres</a>

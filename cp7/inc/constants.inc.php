@@ -5,6 +5,6 @@ const APP_NAME = 'Au lion d\'or';
 // Constantes liées à la BDD
 const HOST = 'localhost';
 const PORT = 3306;
-const DATA = 'hotels';
+const DATA = 'holidays';
 const USER = 'root';
 const PASS = 'root';
